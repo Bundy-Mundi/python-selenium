@@ -7,7 +7,24 @@
 # Selenium with Python
 
 ## Configuring Virtual Env with Pipenv
+
+```bash
+pip install pipenv
+```
+
 ```bash
 pipenv install --python 3.7
 pipenv install selenium webdriver_manager
 ```
+
+## Execute the Virtual Env
+```bash
+pipenv shell
+```
+
+```bash
+python main.py
+```
+
+## Selenium Webdriver Api 
+[Link](https://selenium-python.readthedocs.io/api.html)
