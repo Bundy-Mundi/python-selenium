@@ -57,10 +57,3 @@ class GoogleKeywordScreenshooter():
 
     def finish(self):
         self.browser.quit()
-
-
-KEYWORD = "hello"
-
-g = GoogleKeywordScreenshooter(KEYWORD, "screenshots", 10)
-g.start()
-g.finish()
