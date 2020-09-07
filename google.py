@@ -1,3 +1,5 @@
+import os
+import shutil
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -14,6 +16,7 @@ class GoogleKeywordScreenshooter():
         self.browser = webdriver.Chrome(ChromeDriverManager().install())
         self.keyword = keyword
         self.search_bar_class = "gLFyf"
+        self.next_button_class = "G0iuSb"
         self.screenshot_dir = screenshot_dir
         self.max_pages = max_pages
         self.filter_by_class_names = args
@@ -41,10 +44,24 @@ class GoogleKeywordScreenshooter():
             pass
 
         # Find elements from the browser with class "g"
-        search_results = self.browser.find_elements_by_class_name("g")
-        for index, search_result in enumerate(search_results):
-            search_result.screenshot(
-                f"{self.screenshot_dir}/{ self.keyword }x{ index }.png")
+        for page in range(self.max_pages):
+            page += 1
+            search_results = self.browser.find_elements_by_class_name("g")
+            path = f"./screenshots/{self.keyword}/page_{page}"
+            try:
+                if os.path.exists(path):
+                    print("Deleted!")
+                    shutil.rmtree(path)
+                os.makedirs(path)
+            except FileExistsError:
+                pass
+            for index, search_result in enumerate(search_results):
+                index += 1
+                save_path = f"screenshots/{self.keyword}/page_{page}/{ self.keyword }_{ index }.png"
+                search_result.screenshot(save_path)
+            next_button = self.browser.find_element_by_class_name(
+                self.next_button_class)
+            next_button.send_keys(Keys.ENTER)
 
     def filter_elements_by_class_name(self):
         elements_to_filter = []
