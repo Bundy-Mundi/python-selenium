@@ -1,15 +1,16 @@
 import os
 import shutil
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 class GoogleKeywordScreenshooter():
     """
+        Extracts and takes screenshots of each search result.
     """
 
     def __init__(self, keyword, screenshot_dir, max_pages, *args):
