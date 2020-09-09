@@ -1,3 +1,5 @@
 .vscode
 .env
 /screenshots
+/res-screenshots
+debug.log
